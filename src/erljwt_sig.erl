@@ -70,8 +70,8 @@ create(Algo, Payload, Key)
     base64url:encode(ec_signature(R, S, Algo));
 create(Algo, Payload, Key)
   when Algo == hs256; Algo == hs384; Algo == hs512 ->
-    base64url:encode(crypto:hmac(algo_to_hash(Algo), convert_key(Key),
-                                 Payload));
+    base64url:encode(crypto:mac(hmac, algo_to_hash(Algo),
+                                convert_key(Key), Payload));
 create(none, _Payload, _Key) ->
     <<"">>;
 create(_, _, _) ->
